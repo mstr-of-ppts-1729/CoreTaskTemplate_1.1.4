@@ -1,20 +1,18 @@
 package jm.task.core.jdbc.model;
+import org.hibernate.annotations.DynamicUpdate;
+import javax.persistence.*;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-@Table
+@Entity
+@Table (name = "users")
 public class User {
     @Id
+    @Column
+    @GeneratedValue
     private Long id;
-
     @Column
     private String name;
-
     @Column
     private String lastName;
-
     @Column
     private Byte age;
 
