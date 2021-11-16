@@ -27,13 +27,14 @@ public class Util {
         try {
             DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
             connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            connection.setAutoCommit(false);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return connection;
     }
 
-    public Session getSession() {
+    public static SessionFactory getSessionFactory() {
         Properties properties = new Properties();
         properties.setProperty(Environment.DIALECT, "org.hibernate.dialect.MySQL5Dialect");
         properties.setProperty(Environment.HBM2DDL_AUTO, "update");
@@ -45,6 +46,6 @@ public class Util {
         cfg.setProperties(properties);
         cfg.addAnnotatedClass(User.class);
         SessionFactory sessionFactory = cfg.buildSessionFactory();
-        return session = sessionFactory.openSession();
+        return sessionFactory;
     }
 }
